@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/Releases/(.*)",
+      "destination": "/Releases/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
