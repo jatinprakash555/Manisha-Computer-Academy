@@ -7,7 +7,6 @@ import Students from './pages/Students'
 import Attendance from './pages/Attendance'
 import Exams from './pages/Exams'
 import Messages from './pages/Messages'
-import Versions from './pages/Versions'
 import LandingPage from './pages/LandingPage'
 import StudentDashboard from './pages/StudentDashboard'
 import { supabase } from './supabaseClient'
@@ -372,7 +371,6 @@ export default function App() {
       case 'attendance': return 'Attendance Tracker'
       case 'exams': return 'AI Examination Hub'
       case 'messages': return 'Broadcast Messages'
-      case 'versions': return 'App Version Control'
       default: return 'Institutional Portal'
     }
   }
@@ -680,9 +678,6 @@ export default function App() {
             <Messages
               students={students}
             />
-          )}
-          {currentPage === 'versions' && (
-            <Versions />
           )}
         </main>
       </div>

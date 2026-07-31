@@ -7,7 +7,6 @@ const NAV_ITEMS = [
   { id: 'attendance', icon: '📅', label: 'Attendance' },
   { id: 'exams', icon: '❓', label: 'AI Exams' },
   { id: 'messages', icon: '💬', label: 'Broadcast Messages' },
-  { id: 'versions', icon: '🔄', label: 'App Versioning' },
 ]
 
 export default function Sidebar({ currentPage, onNavigate, onSignOut, userEmail, theme, onToggleTheme }) {
