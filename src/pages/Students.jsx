@@ -491,22 +491,9 @@ export default function Students({
                     ACCOUNT IDENTITY & CREDENTIAL BINDING
                   </h4>
                   <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '12px' }}>
-                    <img
-                    src={activeProfileStudent.avatar?.replace('/src/assets/', '/') || '/student_avatar.png'}
-                      alt={`${activeProfileStudent.name || 'Student'} Avatar`}
-                      style={{
-                        width: '56px',
-                        height: '56px',
-                        border: '1px solid var(--border-grid)',
-                        borderRadius: '8px',
-                        objectFit: 'cover'
-                      }}
-                      onError={(e) => {
-                        e.target.onerror = null
-                        e.target.style.display = 'none'
-                        e.target.parentNode.innerHTML = '<span style="font-size:2.5rem;display:flex;align-items:center;justify-content:center;width:56px;height:56px;background:var(--bg-darker);border-radius:8px;border:1px solid var(--border-grid)">🎓</span>'
-                      }}
-                    />
+                    <div className="avatar-placeholder" style={{ width: '56px', height: '56px', fontSize: '1.35rem', background: 'var(--brand-gradient)', color: '#fff', fontWeight: 700, borderRadius: '8px', border: '1px solid var(--border-grid)' }}>
+                      {(activeProfileStudent.name || 'S').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
+                    </div>
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
                       <div style={{ fontSize: '0.85rem' }}>
                         <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.7rem', fontWeight: 700 }}>BINDED GMAIL ID</span>
