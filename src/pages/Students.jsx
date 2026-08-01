@@ -145,7 +145,7 @@ export default function Students({
       password: newStudent.password || `${newStudent.name.trim().split(' ')[0]}@123`,
       email: newStudent.email || `${newStudent.name.toLowerCase().trim().replace(/\s+/g, '.')}@gmail.com`,
       joiningMonth: currentMonthYear,
-      avatar: '/src/assets/student_avatar.png',
+      avatar: '/student_avatar.png',
       batch: newStudent.batch,
       rollNumber: newStudent.rollNumber,
       aiUsed: 0,
@@ -166,7 +166,7 @@ export default function Students({
       email: student.email || '',
       rollNumber: student.rollNumber || '',
       joiningMonth: student.joiningMonth || 'July 2026',
-      avatar: student.avatar || '/src/assets/student_avatar.png',
+      avatar: student.avatar || '/student_avatar.png',
       aiUsed: student.aiUsed || 0,
       aiTotal: student.aiTotal || 150,
     })
@@ -232,7 +232,7 @@ export default function Students({
         password: `${firstName}@${batch}`,
         email: `${emailName}@gmail.com`,
         joiningMonth: currentMonthYear,
-        avatar: '/src/assets/student_avatar.png',
+        avatar: '/student_avatar.png',
         batch: batch,
         rollNumber: generatedRoll,
         aiUsed: 0,
@@ -492,7 +492,7 @@ export default function Students({
                   </h4>
                   <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '12px' }}>
                     <img
-                      src={activeProfileStudent.avatar || '/src/assets/student_avatar.png'}
+                    src={activeProfileStudent.avatar?.replace('/src/assets/', '/') || '/student_avatar.png'}
                       alt={`${activeProfileStudent.name || 'Student'} Avatar`}
                       style={{
                         width: '56px',
@@ -503,7 +503,8 @@ export default function Students({
                       }}
                       onError={(e) => {
                         e.target.onerror = null
-                        e.target.src = '/src/assets/react.svg'
+                        e.target.style.display = 'none'
+                        e.target.parentNode.innerHTML = '<span style="font-size:2.5rem;display:flex;align-items:center;justify-content:center;width:56px;height:56px;background:var(--bg-darker);border-radius:8px;border:1px solid var(--border-grid)">🎓</span>'
                       }}
                     />
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>

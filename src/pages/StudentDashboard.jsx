@@ -8,7 +8,7 @@ export default function StudentDashboard({ student, onSignOut, theme }) {
   const email = student.email || 'scholar@manishaacademy.edu'
   const phone = student.phone || '+919861487672'
   const joiningMonth = student.joiningMonth || 'March 2026'
-  const avatar = student.avatar || '/src/assets/student_avatar.png'
+  const avatar = student.avatar?.replace('/src/assets/', '/') || '/student_avatar.png'
 
   // Retrieve Supabase synced student stats
   const stats = student.stats || {
