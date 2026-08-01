@@ -31,9 +31,11 @@ export default function Attendance({ batches = [], students = [] }) {
   const [showHistoryStudent, setShowHistoryStudent] = useState(null)
 
   const batch = batches.find(b => b.id === selectedBatch)
-  // Query students dynamically belonging to this batch code
+  // Query students dynamically belonging to this batch code, sorted by roll number
   const batchStudents = useMemo(() => {
-    return students.filter(s => s.batch === batch?.code)
+    return students
+      .filter(s => s.batch === batch?.code)
+      .sort((a, b) => (a.rollNumber || '').localeCompare(b.rollNumber || '', undefined, { numeric: true, sensitivity: 'base' }))
   }, [students, batch])
 
   const today = new Date().toISOString().split('T')[0]
@@ -213,10 +215,10 @@ export default function Attendance({ batches = [], students = [] }) {
       {/* Student History Modal */}
       {showHistoryStudent && (
         <div className="modal-overlay" onClick={() => setShowHistoryStudent(null)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '420px' }}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '420px' }}>
             <div className="modal-header">
               <h3>STUDENT HISTORY</h3>
-              <button className="modal-close" onClick={() => setShowHistoryStudent(null)}>×</button>
+              <button className="modal-close-btn" onClick={() => setShowHistoryStudent(null)}>×</button>
             </div>
 
             <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '12px' }}>

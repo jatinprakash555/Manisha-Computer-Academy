@@ -12,17 +12,17 @@ import StudentDashboard from './pages/StudentDashboard'
 import { supabase } from './supabaseClient'
 
 const INITIAL_BATCHES = [
-  { id: 'B_OSCIT_12PM', name: 'OSCIT 12:00 PM', students: 6, teacher: 'Dr. Aris Thorne', schedule: 'Daily 12:00 PM - 01:00 PM', status: 'active', code: 'OSCIT_12PM' },
-  { id: 'B_OSCIT_10_11AM', name: 'OSCIT 10:00 AM - 11:00 AM', students: 10, teacher: 'Dr. Aris Thorne', schedule: 'Daily 10:00 AM - 11:00 AM', status: 'active', code: 'OSCIT_10_11AM' },
-  { id: 'B_OSCIT_04_05PM_PART1', name: 'OSCIT 04:00 PM (Part 1)', students: 17, teacher: 'Dr. Aris Thorne', schedule: 'Daily 04:00 PM - 05:00 PM', status: 'active', code: 'OSCIT_04_05PM_PART1' },
-  { id: 'B_OSCIT_04_05PM_PART2', name: 'OSCIT 04:00 PM (Part 2)', students: 5, teacher: 'Dr. Aris Thorne', schedule: 'Daily 04:00 PM - 05:00 PM', status: 'active', code: 'OSCIT_04_05PM_PART2' },
-  { id: 'B_OSCIT_03_05PM', name: 'OSCIT 03:00 PM - 05:00 PM', students: 12, teacher: 'Dr. Aris Thorne', schedule: 'Daily 03:00 PM - 05:00 PM', status: 'active', code: 'OSCIT_03_05PM' },
-  { id: 'B_OSCIT_06_07PM', name: 'OSCIT 06:00 PM - 07:00 PM', students: 14, teacher: 'Dr. Aris Thorne', schedule: 'Daily 06:00 PM - 07:00 PM', status: 'active', code: 'OSCIT_06_07PM' },
-  { id: 'B_OSCIT_07_08PM', name: 'OSCIT 07:00 PM - 08:00 PM', students: 7, teacher: 'Dr. Aris Thorne', schedule: 'Daily 07:00 PM - 08:00 PM', status: 'active', code: 'OSCIT_07_08PM' },
-  { id: 'B_OSCIT_08_09PM', name: 'OSCIT 08:00 PM - 09:00 PM', students: 38, teacher: 'Dr. Aris Thorne', schedule: 'Daily 08:00 PM - 09:00 PM & Addl', status: 'active', code: 'OSCIT_08_09PM' },
+  { id: 'B_OSCIT_12PM', name: 'OSCIT 12:00 PM', students: 6, teacher: 'Manisha Admin', schedule: 'Daily 12:00 PM - 01:00 PM', status: 'active', code: 'OSCIT_12PM' },
+  { id: 'B_OSCIT_10_11AM', name: 'OSCIT 10:00 AM - 11:00 AM', students: 10, teacher: 'Manisha Admin', schedule: 'Daily 10:00 AM - 11:00 AM', status: 'active', code: 'OSCIT_10_11AM' },
+  { id: 'B_OSCIT_04_05PM_PART1', name: 'OSCIT 04:00 PM (Part 1)', students: 17, teacher: 'Manisha Admin', schedule: 'Daily 04:00 PM - 05:00 PM', status: 'active', code: 'OSCIT_04_05PM_PART1' },
+  { id: 'B_OSCIT_04_05PM_PART2', name: 'OSCIT 04:00 PM (Part 2)', students: 5, teacher: 'Manisha Admin', schedule: 'Daily 04:00 PM - 05:00 PM', status: 'active', code: 'OSCIT_04_05PM_PART2' },
+  { id: 'B_OSCIT_03_05PM', name: 'OSCIT 03:00 PM - 05:00 PM', students: 12, teacher: 'Manisha Admin', schedule: 'Daily 03:00 PM - 05:00 PM', status: 'active', code: 'OSCIT_03_05PM' },
+  { id: 'B_OSCIT_06_07PM', name: 'OSCIT 06:00 PM - 07:00 PM', students: 14, teacher: 'Manisha Admin', schedule: 'Daily 06:00 PM - 07:00 PM', status: 'active', code: 'OSCIT_06_07PM' },
+  { id: 'B_OSCIT_07_08PM', name: 'OSCIT 07:00 PM - 08:00 PM', students: 7, teacher: 'Manisha Admin', schedule: 'Daily 07:00 PM - 08:00 PM', status: 'active', code: 'OSCIT_07_08PM' },
+  { id: 'B_OSCIT_08_09PM', name: 'OSCIT 08:00 PM - 09:00 PM', students: 38, teacher: 'Manisha Admin', schedule: 'Daily 08:00 PM - 09:00 PM & Addl', status: 'active', code: 'OSCIT_08_09PM' },
 ]
 
-const INITIAL_STUDENTS = [
+const INITIAL_STUDENTS_RAW = [
   { id: 100, name: "Sweety Das", phone: "Sweety@OSCIT", email: "mca-oscit_12pm-001.temp@manisha.academy", joiningMonth: "July 2026", avatar: "/src/assets/student_avatar.png", batch: "OSCIT_12PM", rollNumber: "MCA-OSCIT_12PM-001", aiUsed: 0, aiTotal: 150 },
   { id: 101, name: "Beauty Das", phone: "Beauty@OSCIT", email: "mca-oscit_12pm-002.temp@manisha.academy", joiningMonth: "July 2026", avatar: "/src/assets/student_avatar.png", batch: "OSCIT_12PM", rollNumber: "MCA-OSCIT_12PM-002", aiUsed: 0, aiTotal: 150 },
   { id: 102, name: "Monalisa Behera", phone: "Monalisa@OSCIT", email: "mca-oscit_12pm-003.temp@manisha.academy", joiningMonth: "July 2026", avatar: "/src/assets/student_avatar.png", batch: "OSCIT_12PM", rollNumber: "MCA-OSCIT_12PM-003", aiUsed: 0, aiTotal: 150 },
@@ -133,6 +133,30 @@ const INITIAL_STUDENTS = [
   { id: 207, name: "Golapi Marndi", phone: "Golapi@OSCIT", email: "mca-oscit_08_09pm-037.temp@manisha.academy", joiningMonth: "July 2026", avatar: "/src/assets/student_avatar.png", batch: "OSCIT_08_09PM", rollNumber: "MCA-OSCIT_08_09PM-037", aiUsed: 0, aiTotal: 150 },
   { id: 208, name: "Rudra (11-10)", phone: "Rudra@OSCIT", email: "mca-oscit_08_09pm-038.temp@manisha.academy", joiningMonth: "July 2026", avatar: "/src/assets/student_avatar.png", batch: "OSCIT_08_09PM", rollNumber: "MCA-OSCIT_08_09PM-038", aiUsed: 0, aiTotal: 150 },
 ]
+
+let mcaOscitCount = 0
+const INITIAL_STUDENTS_PROCESSED = INITIAL_STUDENTS_RAW.map((s, idx) => {
+  const isCredentialPhone = s.phone && s.phone.includes('@')
+  const phoneVal = isCredentialPhone ? `+91 98123 ${String(idx + 100).padStart(5, '0')}` : s.phone
+  const passwordVal = isCredentialPhone ? s.phone : `${s.name.split(' ')[0]}@123`
+  let updated = {
+    ...s,
+    phone: phoneVal,
+    password: passwordVal
+  }
+  if (s.rollNumber && s.rollNumber.startsWith('MCA-')) {
+    mcaOscitCount++
+    const padded = String(mcaOscitCount).padStart(3, '0')
+    updated = {
+      ...updated,
+      rollNumber: `MCA-${padded}`,
+      email: `mca-${padded}.temp@manisha.academy`
+    }
+  }
+  return updated
+})
+
+const INITIAL_STUDENTS = INITIAL_STUDENTS_PROCESSED
 
 export default function App() {
   // ─── Theme State ───────────────────────────────────────────────────────────
@@ -348,6 +372,7 @@ export default function App() {
   const [students, setStudents] = useState([])
   const [selectedBatchFilter, setSelectedBatchFilter] = useState('')
   const [dbConnected, setDbConnected] = useState(false)
+  const [hasPasswordColumn, setHasPasswordColumn] = useState(false)
   const [exams, setExams] = useState([])
   const [timeString, setTimeString] = useState('')
 
@@ -398,6 +423,9 @@ export default function App() {
         setBatches(batchesData || [])
         setStudents(studentsData || [])
         setDbConnected(true)
+        if (studentsData && studentsData.length > 0) {
+          setHasPasswordColumn(studentsData[0].password !== undefined)
+        }
 
         // Load exams from cache
         const { data: examsData } = await supabase
@@ -476,10 +504,20 @@ export default function App() {
       // Find new students
       const newItems = nextStudents.filter(s => !students.some(old => old.id === s.id))
       for (const student of newItems) {
-        // Omit id from insert to let Supabase auto-increment it, or keep it if serial.
-        // Let's insert without ID if it's new so Supabase auto-assigns it.
         const { id, ...studentData } = student
-        await supabase.from('students').insert([studentData])
+        const payload = {
+          name: studentData.name,
+          phone: studentData.phone,
+          email: studentData.email,
+          batch: studentData.batch,
+          rollNumber: studentData.rollNumber,
+          aiTotal: studentData.aiTotal,
+          aiUsed: studentData.aiUsed,
+        }
+        if (hasPasswordColumn) {
+          payload.password = studentData.password || '123456'
+        }
+        await supabase.from('students').insert([payload])
       }
 
       // Find updated students
@@ -492,22 +530,27 @@ export default function App() {
           old.batch !== s.batch ||
           old.rollNumber !== s.rollNumber ||
           old.aiTotal !== s.aiTotal ||
-          old.aiUsed !== s.aiUsed
+          old.aiUsed !== s.aiUsed ||
+          old.password !== s.password
         )
       })
 
       for (const student of updatedItems) {
+        const payload = {
+          name: student.name,
+          phone: student.phone,
+          email: student.email,
+          batch: student.batch,
+          rollNumber: student.rollNumber,
+          aiTotal: student.aiTotal,
+          aiUsed: student.aiUsed,
+        }
+        if (hasPasswordColumn) {
+          payload.password = student.password || '123456'
+        }
         await supabase
           .from('students')
-          .update({
-            name: student.name,
-            phone: student.phone,
-            email: student.email,
-            batch: student.batch,
-            rollNumber: student.rollNumber,
-            aiTotal: student.aiTotal,
-            aiUsed: student.aiUsed,
-          })
+          .update(payload)
           .eq('id', student.id)
       }
     }
@@ -632,9 +675,9 @@ export default function App() {
             </div>
 
             <div className="stitch-admin-avatar-card">
-              <div className="stitch-admin-avatar">👨‍⚕️</div>
+              <div className="stitch-admin-avatar">👩‍💼</div>
               <div>
-                <div className="admin-name">Dr. Aris Thorne</div>
+                <div className="admin-name">Manisha Admin</div>
                 <div className="admin-role">Global Administrator</div>
               </div>
             </div>
@@ -659,6 +702,7 @@ export default function App() {
               batches={batches}
               selectedBatchFilter={selectedBatchFilter}
               setSelectedBatchFilter={setSelectedBatchFilter}
+              hasPasswordColumn={hasPasswordColumn}
             />
           )}
           {currentPage === 'attendance' && (

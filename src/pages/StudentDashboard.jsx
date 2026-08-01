@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 export default function StudentDashboard({ student, onSignOut, theme }) {
   // Extract student details and stats with fallback mock values matching Android LocalStore defaults
-  const roll = student.rollNumber || 'DC-10A-001'
+  const roll = student.rollNumber || 'DC-10A-01'
   const name = student.name || 'Scholar'
   const batch = student.batch || '10A'
   const email = student.email || 'scholar@manishaacademy.edu'

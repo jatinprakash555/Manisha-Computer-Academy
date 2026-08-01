@@ -113,10 +113,10 @@ export default function Batches({ batches = [], setBatches, onViewRegistry }) {
       {/* Create Batch Modal */}
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h3>Create New Batch</h3>
-              <button className="modal-close" onClick={() => setShowModal(false)}>×</button>
+              <button className="modal-close-btn" onClick={() => setShowModal(false)}>×</button>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>

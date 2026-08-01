@@ -1,5 +1,379 @@
 import { useState, useEffect } from 'react'
 
+// Animated SVG Robot Icon
+const RobotIcon = () => (
+  <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Head */}
+    <rect x="25" y="25" width="50" height="40" rx="10" fill="#7C3AED" stroke="#4C1D95" strokeWidth="3" />
+    {/* Ears/Antenna base */}
+    <rect x="20" y="40" width="5" height="10" rx="2" fill="#A78BFA" />
+    <rect x="75" y="40" width="5" height="10" rx="2" fill="#A78BFA" />
+    {/* Antenna */}
+    <line x1="50" y1="25" x2="50" y2="10" stroke="#4C1D95" strokeWidth="3" />
+    <circle cx="50" cy="10" r="5" fill="#EF4444" />
+    {/* Eyes */}
+    <circle cx="40" cy="40" r="6" fill="#06B6D4" />
+    <circle cx="40" cy="40" r="2" fill="#FFFFFF" />
+    <circle cx="60" cy="40" r="6" fill="#06B6D4" />
+    <circle cx="60" cy="40" r="2" fill="#FFFFFF" />
+    {/* Mouth */}
+    <rect x="38" y="52" width="24" height="6" rx="3" fill="#1E293B" />
+    {/* Body Connections */}
+    <rect x="44" y="65" width="12" height="8" fill="#D1D5DB" stroke="#4C1D95" strokeWidth="2" />
+    {/* Body */}
+    <rect x="20" y="73" width="60" height="24" rx="8" fill="#7C3AED" stroke="#4C1D95" strokeWidth="3" />
+    {/* Light indicators on body */}
+    <circle cx="35" cy="85" r="3" fill="#10B981" />
+    <circle cx="50" cy="85" r="3" fill="#F59E0B" />
+    <circle cx="65" cy="85" r="3" fill="#EF4444" />
+  </svg>
+)
+
+// Academy Chatbot Component simulating a 200M parameter AI model loaded with institute knowledge
+const AcademyChatbot = ({ theme }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [messages, setMessages] = useState([
+    { sender: 'bot', text: 'Namaskar! I am the Manisha Academy AI Assistant. How can I help you today regarding our courses, admissions, timings, or internships?' }
+  ])
+  const [input, setInput] = useState('')
+  const [isTyping, setIsTyping] = useState(false)
+  
+  // Conversational Knowledge Base mapping without markdown symbols
+  const knowledgeBase = [
+    {
+      keywords: ['course', 'syllabus', 'learn', 'subject', 'teach', 'study', 'class'],
+      response: "At Manisha Computer Academy, we offer a wide range of professional computer courses. For foundational digital skills, we provide the 3-month OSCIT course. If you want a comprehensive diploma, we offer PGDCA and DCA courses that run for 6 to 12 months. We also teach core programming in languages like C, C++, Java, and Python, alongside advanced classes in Artificial Intelligence, Robotics, Cyber Security, Big Data, AutoCAD, and Tally Prime with GST. Additionally, we run school coaching classes for academic students."
+    },
+    {
+      keywords: ['ai', 'artificial intelligence', 'machine learning', 'ml', 'llm', 'generative'],
+      response: "Our artificial intelligence courses are highly practical and built to help you build real skills. We offer a 6-month AI and Machine Learning Specialist course and a 3-month Generative AI and LLM Engineering bootcamp. In these tracks, you will master Python programming, Scikit-Learn, neural networks, prompt engineering, and API integrations with Gemini and OpenAI."
+    },
+    {
+      keywords: ['intern', 'internship', 'job', 'placement', 'career', 'opportunity'],
+      response: "Yes, we provide hands-on internship programs in AI, Machine Learning, and Robotics lasting between 3 to 6 months. During the internship, you will work on live datasets, write scripts for embedded hardware, and build physical automated systems to gain real-world career preparation."
+    },
+    {
+      keywords: ['fee', 'cost', 'price', 'admission', 'apply', 'join', 'register', 'enroll'],
+      response: "Admissions are active! Course prices and fees depend on your specific program. For detailed pricing details, please reach out to us by email at registrar@manishaacademy.edu, call our registrar office directly at 8260164606 or 9861487672, or visit our campus located near Nuapada Durga Mandap in Cuttack, Odisha, where our counseling team will assist you with full details."
+    },
+    {
+      keywords: ['time', 'schedule', 'hour', 'timing', 'open', 'close', 'duration'],
+      response: "Classes run from Monday to Saturday, and we offer flexible hourly batches throughout the day to fit different schedules. The registrar office is open from 8:00 AM to 1:00 PM in the morning, and 4:00 PM to 9:00 PM in the evening. We are closed on Sundays."
+    },
+    {
+      keywords: ['address', 'location', 'where', 'map', 'cuttack', 'campus', 'phone', 'contact', 'call', 'number', 'mobile'],
+      response: "Our campus is located at Nuapada, Madhupatna, near the Nuapada Durga Mandap in Cuttack, Odisha, India. You can contact us directly by phone at 8260164606 or 9861487672, or write to our registrar via email at registrar@manishaacademy.edu."
+    },
+    {
+      keywords: ['robot', 'hardware', 'embedded', 'arduino', 'raspberry pi'],
+      response: "In our Robotics and Embedded Systems lab, you get to build and program physical systems. You will learn to wire sensors, integrate microcontrollers, and write custom scripts for Arduino and Raspberry Pi boards to automate devices."
+    }
+  ]
+
+  const handleSend = (e) => {
+    e.preventDefault()
+    if (!input.trim()) return
+
+    const userText = input.trim()
+    setMessages(prev => [...prev, { sender: 'user', text: userText }])
+    setInput('')
+    setIsTyping(true)
+
+    // Simulate model inference time
+    setTimeout(() => {
+      let botResponse = "I'm not sure about that detail. Could you try asking about our courses, admissions, timings, internships, or campus address? You can also contact our registrar at 8260164606."
+      const cleanText = userText.toLowerCase()
+
+      // Simple keyword matcher
+      for (const item of knowledgeBase) {
+        if (item.keywords.some(k => cleanText.includes(k))) {
+          botResponse = item.response
+          break
+        }
+      }
+
+      setMessages(prev => [...prev, { sender: 'bot', text: botResponse }])
+      setIsTyping(false)
+    }, 600)
+  }
+
+  // Pre-filled questions helper
+  const sendQuickQuestion = (qText) => {
+    setInput(qText)
+    // Trigger submit helper
+    setTimeout(() => {
+      const e = { preventDefault: () => {} }
+      handleSend(e)
+    }, 50)
+  }
+
+  return (
+    <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 9999 }}>
+      {/* Dynamic Style Injection for Premium UI */}
+      <style>{`
+        .mca-chatbot-trigger {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
+          color: white;
+          border: none;
+          cursor: pointer;
+          box-shadow: 0 8px 24px rgba(124, 92, 237, 0.4);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.75rem;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mca-chatbot-trigger:hover {
+          transform: scale(1.1) rotate(5deg);
+          box-shadow: 0 12px 30px rgba(124, 92, 237, 0.6);
+        }
+        .mca-chatbot-window {
+          width: 350px;
+          height: 480px;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(124, 92, 237, 0.25);
+          border-radius: 20px;
+          box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          animation: popWindow 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+          color: #1E293B;
+        }
+        .dark-blackboard .mca-chatbot-window {
+          background: rgba(15, 23, 42, 0.95);
+          border-color: rgba(167, 139, 250, 0.25);
+          color: #F8FAFC;
+        }
+        @keyframes popWindow {
+          0% { transform: scale(0.8) translateY(20px); opacity: 0; }
+          100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .pulse-status {
+          width: 8px;
+          height: 8px;
+          background-color: #10B981;
+          border-radius: 50%;
+          display: inline-block;
+          position: relative;
+        }
+        .pulse-status::after {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          border-radius: 50%;
+          border: 2px solid #10B981;
+          animation: pulseAnim 1.5s infinite;
+        }
+        @keyframes pulseAnim {
+          0% { transform: scale(1); opacity: 1; }
+          100% { transform: scale(2.5); opacity: 0; }
+        }
+        .mca-chat-suggest-btn {
+          padding: 6px 12px;
+          font-size: 0.72rem;
+          border-radius: 12px;
+          border: 1px solid rgba(124, 92, 237, 0.35);
+          background: rgba(124, 92, 237, 0.05);
+          color: #7C3AED;
+          cursor: pointer;
+          white-space: nowrap;
+          font-weight: 800;
+          transition: all 0.2s ease;
+        }
+        .dark-blackboard .mca-chat-suggest-btn {
+          border-color: rgba(167, 139, 250, 0.35);
+          background: rgba(167, 139, 250, 0.05);
+          color: #C084FC;
+        }
+        .mca-chat-suggest-btn:hover {
+          background: #7C3AED;
+          color: white;
+          border-color: #7C3AED;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 10px rgba(124, 92, 237, 0.2);
+        }
+        .dark-blackboard .mca-chat-suggest-btn:hover {
+          background: #A78BFA;
+          color: #0F172A;
+          border-color: #A78BFA;
+        }
+        .chat-scroll-area::-webkit-scrollbar {
+          width: 6px;
+        }
+        .chat-scroll-area::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .chat-scroll-area::-webkit-scrollbar-thumb {
+          background: rgba(124, 92, 237, 0.2);
+          border-radius: 3px;
+        }
+        .chat-scroll-area::-webkit-scrollbar-thumb:hover {
+          background: rgba(124, 92, 237, 0.4);
+        }
+      `}</style>
+
+      {/* Floating Button */}
+      {!isOpen && (
+        <button 
+          onClick={() => setIsOpen(true)}
+          className="mca-chatbot-trigger"
+          title="Open AI Assistant"
+        >
+          💬
+        </button>
+      )}
+
+      {/* Chat Window */}
+      {isOpen && (
+        <div className="mca-chatbot-window">
+          {/* Header */}
+          <div style={{
+            background: 'linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%)',
+            padding: '14px 18px',
+            color: 'white',
+            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+            flexShrink: 0
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '1.4rem' }}>🤖</span>
+              <div style={{ textAlign: 'left' }}>
+                <div style={{ fontWeight: 900, fontSize: '0.88rem', letterSpacing: '0.3px' }}>MCA AI Model (200M)</div>
+                <div style={{ fontSize: '0.62rem', opacity: 0.9, fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <span className="pulse-status"></span> Active • Knowledge Loaded
+                </div>
+              </div>
+            </div>
+            <button 
+              onClick={() => setIsOpen(false)}
+              style={{ background: 'none', border: 'none', color: 'white', fontSize: '1.25rem', cursor: 'pointer', outline: 'none', padding: '4px' }}
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* Messages Area */}
+          <div className="chat-scroll-area" style={{
+            flex: 1, padding: '16px',
+            overflowY: 'auto',
+            display: 'flex', flexDirection: 'column', gap: '12px',
+            background: theme === 'light' ? '#F8FAFC' : '#0F172A'
+          }}>
+            {messages.map((m, i) => (
+              <div 
+                key={i} 
+                className={m.sender === 'bot' ? 'message-bubble-bot' : ''}
+                style={{
+                  alignSelf: m.sender === 'user' ? 'flex-end' : 'flex-start',
+                  maxWidth: '85%',
+                  background: m.sender === 'user' ? 'linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%)' : (theme === 'light' ? '#FFFFFF' : '#334155'),
+                  color: m.sender === 'user' ? 'white' : (theme === 'light' ? '#1E293B' : '#F8FAFC'),
+                  padding: '10px 14px',
+                  borderRadius: m.sender === 'user' ? '16px 16px 0 16px' : '16px 16px 16px 0',
+                  fontSize: '0.82rem',
+                  lineHeight: '1.45',
+                  whiteSpace: 'pre-wrap',
+                  textAlign: 'left',
+                  boxShadow: m.sender === 'bot' ? '0 3px 8px rgba(0,0,0,0.03)' : '0 4px 10px rgba(124,92,237,0.15)'
+                }}
+              >
+                {m.text}
+              </div>
+            ))}
+            {isTyping && (
+              <div style={{
+                alignSelf: 'flex-start',
+                background: theme === 'light' ? '#FFFFFF' : '#334155',
+                color: theme === 'light' ? '#64748B' : '#94A3B8',
+                padding: '10px 14px',
+                borderRadius: '16px 16px 16px 0',
+                fontSize: '0.82rem',
+                fontWeight: 700,
+                boxShadow: '0 3px 8px rgba(0,0,0,0.03)'
+              }}>
+                Typing...
+              </div>
+            )}
+          </div>
+
+          {/* Quick Suggestions */}
+          <div style={{
+            padding: '8px 12px',
+            display: 'flex', gap: '6px',
+            overflowX: 'auto',
+            background: theme === 'light' ? '#FFFFFF' : '#1E293B',
+            borderTop: '1px solid rgba(0,0,0,0.05)',
+            flexShrink: 0
+          }} className="chat-scroll-area">
+            <button 
+              onClick={() => sendQuickQuestion('What courses do you offer?')}
+              className="mca-chat-suggest-btn"
+            >
+              📚 Courses
+            </button>
+            <button 
+              onClick={() => sendQuickQuestion('How to apply for AI internships?')}
+              className="mca-chat-suggest-btn"
+            >
+              🤖 AI Internships
+            </button>
+            <button 
+              onClick={() => sendQuickQuestion('What are the school timings?')}
+              className="mca-chat-suggest-btn"
+            >
+              🕒 Timings
+            </button>
+            <button 
+              onClick={() => sendQuickQuestion('Where is the campus located?')}
+              className="mca-chat-suggest-btn"
+            >
+              📍 Location
+            </button>
+          </div>
+
+          {/* Input Form */}
+          <form 
+            onSubmit={handleSend}
+            style={{
+              display: 'flex', borderTop: '1px solid rgba(0,0,0,0.05)',
+              background: theme === 'light' ? '#FFFFFF' : '#1E293B',
+              flexShrink: 0
+            }}
+          >
+            <input 
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask about courses, timings..."
+              style={{
+                flex: 1, border: 'none', padding: '12px 16px',
+                fontSize: '0.82rem', outline: 'none',
+                background: 'transparent', color: theme === 'light' ? '#1E293B' : '#F8FAFC'
+              }}
+            />
+            <button 
+              type="submit"
+              style={{
+                background: 'linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%)', color: 'white', border: 'none',
+                padding: '0 18px', cursor: 'pointer', fontWeight: 900,
+                fontSize: '0.82rem', transition: 'opacity 0.2s ease'
+              }}
+            >
+              Send
+            </button>
+          </form>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// Render the clean reconstructed PNG Logo asset generated by Gemini
+
 // Render the clean reconstructed PNG Logo asset generated by Gemini
 const McaLogo = ({ height = 75, className = "" }) => {
   return (
@@ -38,7 +412,16 @@ export default function LandingPage({
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Web Navigation Active Tab
-  const [activeTab, setActiveTab] = useState('home') // 'home' | 'about' | 'features' | 'lab' | 'contact'
+  const [activeTab, setActiveTab] = useState('home') // 'home' | 'about' | 'features' | 'lab' | 'contact' | 'ai'
+
+  const robotQuotes = [
+    "Hello! I am the MCA AI Companion. Did you know we offer Python & AI internships?",
+    "Our Robotics Lab lets you build and code physical automated microcontrollers!",
+    "Mastering prompt engineering, Gemini API, and LangChain is part of our curriculum.",
+    "We provide 100% hands-on training with modern AI tools like ChatGPT and Copilot.",
+    "Click me again to discover more AI features at Manisha Computer Academy!"
+  ]
+  const [quoteIndex, setQuoteIndex] = useState(0)
 
   // Auth Sign-Up States
   const [signUpStep, setSignUpStep] = useState('DETAILS') // 'DETAILS' | 'OTP_VERIFY'
@@ -983,6 +1366,136 @@ export default function LandingPage({
         .dark-blackboard .mca-footer {
           border-top-color: rgba(255,255,255,0.1);
         }
+
+        /* AI & Robotics Hub Styles */
+        .ai-hub-container {
+          padding: 10px 0;
+          display: flex;
+          flex-direction: column;
+          gap: 32px;
+        }
+        .ai-hero-card {
+          background: linear-gradient(135deg, rgba(30, 58, 138, 0.04) 0%, rgba(147, 51, 234, 0.04) 100%);
+          border: 2.5px solid #8B5CF6;
+          padding: 32px;
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          gap: 32px;
+          flex-wrap: wrap;
+        }
+        .light-notebook .ai-hero-card {
+          background: linear-gradient(135deg, rgba(30, 58, 138, 0.06) 0%, rgba(147, 51, 234, 0.06) 100%);
+          border-color: #7C3AED;
+          color: #1E293B;
+        }
+        .dark-blackboard .ai-hero-card {
+          background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+          border-color: #A78BFA;
+          color: #F8FAFC;
+        }
+        .ai-hero-content {
+          flex: 2;
+          min-width: 280px;
+        }
+        .ai-robot-visual {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          min-width: 200px;
+        }
+        .robot-interactive {
+          width: 140px;
+          height: 140px;
+          cursor: pointer;
+          animation: floatRobot 4s ease-in-out infinite;
+          transition: transform 0.3s ease;
+        }
+        .robot-interactive:hover {
+          transform: scale(1.1) rotate(2deg);
+        }
+        @keyframes floatRobot {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+        .robot-bubble {
+          background: #FFFFFF;
+          border: 2px solid #7C3AED;
+          color: #1E293B;
+          padding: 12px 16px;
+          border-radius: 16px;
+          position: relative;
+          max-width: 250px;
+          margin-bottom: 16px;
+          font-size: 0.85rem;
+          font-weight: 800;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+          animation: popBubble 0.3s ease-out;
+        }
+        .dark-blackboard .robot-bubble {
+          background: #1E293B;
+          border-color: #A78BFA;
+          color: #F8FAFC;
+        }
+        @keyframes popBubble {
+          0% { transform: scale(0.8); opacity: 0; }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        .robot-bubble::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 45px;
+          border-width: 8px 8px 0;
+          border-style: solid;
+          border-color: #FFFFFF transparent;
+          display: block;
+          width: 0;
+        }
+        .dark-blackboard .robot-bubble::after {
+          border-color: #1E293B transparent;
+        }
+        .ai-tools-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+          gap: 16px;
+          margin-top: 16px;
+        }
+        .ai-tool-card {
+          background: #FFFFFF;
+          border: 2px solid rgba(0,0,0,0.08);
+          padding: 16px;
+          border-radius: 12px;
+          text-align: center;
+          transition: all 0.2s ease;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          color: #1E293B;
+        }
+        .dark-blackboard .ai-tool-card {
+          background: #1E293B;
+          border-color: rgba(255,255,255,0.08);
+          color: #F8FAFC;
+        }
+        .ai-tool-card:hover {
+          border-color: #7C3AED;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .dark-blackboard .ai-tool-card:hover {
+          border-color: #A78BFA;
+        }
+        .ai-tool-icon {
+          font-size: 2rem;
+        }
+        .ai-tool-name {
+          font-weight: 900;
+          font-size: 0.85rem;
+        }
       `}</style>
 
       {/* ─── PAGE 1: CHALKBOARD WELCOME ENTRANCE SCREEN ────────────────────────── */}
@@ -1141,6 +1654,12 @@ export default function LandingPage({
             🧪 Hands-on Lab
           </button>
           <button 
+            className={`mca-tab-btn ${activeTab === 'ai' ? 'active' : ''}`}
+            onClick={() => setActiveTab('ai')}
+          >
+            🤖 AI & Internship
+          </button>
+          <button 
             className={`mca-tab-btn ${activeTab === 'contact' ? 'active' : ''}`}
             onClick={() => setActiveTab('contact')}
           >
@@ -1290,17 +1809,146 @@ export default function LandingPage({
         {/* ─── TAB CONTENT: ABOUT US ─── */}
         {activeTab === 'about' && (
           <section className="mca-section animate-fade">
-            <h2 className="mca-section-title">About Manisha Computer Academy</h2>
-            <div className="mca-custom-card">
-              <h3>Our Heritage</h3>
-              <p style={{ lineHeight: '1.6', fontSize: '1.1rem', opacity: 0.9 }}>
-                Manisha Computer Academy has been a cornerstone of computer education in Odisha for over 15 years. Established with the vision of providing high-quality, practical computer skills, we have guided thousands of students towards successful careers in office management, software programming, accounting, and system administration.
+            <h2 className="mca-section-title">About Manisha Computer Academy & Classes</h2>
+            <div className="mca-custom-card" style={{ padding: '36px', lineHeight: '1.8' }}>
+              <h3 style={{ fontSize: '1.8rem', fontWeight: 900, color: theme === 'light' ? '#1E3A8A' : '#FBBF24', marginBottom: '16px' }}>
+                Institute Introduction
+              </h3>
+              <p style={{ fontSize: '1.15rem', opacity: 0.95, marginBottom: '24px' }}>
+                Manisha Computer Academy & Classes is a leading computer training institute dedicated to providing quality education and practical skills to students. Our mission is to empower learners with the knowledge and confidence required to succeed in today's digital world.
               </p>
               
-              <h3 style={{ marginTop: '24px' }}>Institutional Standards</h3>
-              <p style={{ lineHeight: '1.6', fontSize: '1.1rem', opacity: 0.9 }}>
-                Our academy is a government-registered and certified technical learning institute. We host computer laboratories, hold custom computer-based testings (CBT) for examinations, and provide recognized qualifications that validate student skills in both state and central government profiles.
+              <div style={{ borderLeft: '4px solid #7C3AED', paddingLeft: '20px', margin: '24px 0', background: 'rgba(124, 92, 237, 0.03)', padding: '16px 20px', borderRadius: '0 8px 8px 0' }}>
+                <h4 style={{ fontSize: '1.1rem', fontWeight: 850, margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  Wide Range of Professional & Career-Oriented Courses:
+                </h4>
+                <p style={{ fontSize: '1.1rem', margin: 0, opacity: 0.9 }}>
+                  We offer OSCIT, PGDCA, DCA, Tally Prime with GST, MS Office, Advanced Excel, C, C++, Java, Python, Artificial Intelligence (AI), Robotics, Cyber Security, Big Data, AutoCAD, and many more. Along with computer education, we also provide coaching classes for school students.
+                </p>
+              </div>
+
+              <p style={{ fontSize: '1.1rem', opacity: 0.9, marginBottom: '24px' }}>
+                Our experienced faculty members focus on practical learning, individual guidance, and industry-relevant training to help students build successful careers. At Manisha Computer Academy & Classes, we believe in creating a friendly learning environment where every student can develop technical skills and achieve their career goals.
               </p>
+
+              <div style={{ textAlign: 'center', marginTop: '32px', background: 'linear-gradient(135deg, rgba(30, 58, 138, 0.05) 0%, rgba(124, 92, 237, 0.05) 100%)', padding: '24px', borderRadius: '12px', border: '1.5px dashed var(--brand-accent)' }}>
+                <p style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0, color: theme === 'light' ? '#1E3A8A' : '#FEF08A' }}>
+                  ✨ Join us and take the first step towards a brighter future with quality education, practical knowledge, and professional excellence.
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ─── TAB CONTENT: AI & INTERNSHIPS ─── */}
+        {activeTab === 'ai' && (
+          <section className="mca-section animate-fade" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <h2 className="mca-section-title">AI & Robotics Hub</h2>
+            
+            <div className="ai-hero-card">
+              <div className="ai-hero-content">
+                <h3 style={{ fontSize: '1.75rem', fontWeight: 900, marginBottom: '14px', color: theme === 'light' ? '#1E3A8A' : '#FEF08A' }}>
+                  Empowering the Next Generation of AI Professionals
+                </h3>
+                <p style={{ fontSize: '1.1rem', lineHeight: '1.6', opacity: 0.9 }}>
+                  At Manisha Computer Academy & Classes, we prepare our students for the future of tech. Our advanced Artificial Intelligence (AI) courses, Python Machine Learning bootcamps, and robotics internships provide learners with industry-relevant certifications, individual guidance, and hands-on laboratory implementation.
+                </p>
+                <div style={{ display: 'flex', gap: '10px', marginTop: '20px', flexWrap: 'wrap' }}>
+                  <span className="hero-badge-item" style={{ background: '#7C3AED', color: 'white', border: 'none' }}>✓ Hands-on Internships</span>
+                  <span className="hero-badge-item">✓ Robotics Lab Access</span>
+                  <span className="hero-badge-item">✓ AI Tools Mastery</span>
+                </div>
+              </div>
+              <div className="ai-robot-visual">
+                <div className="robot-bubble">
+                  {robotQuotes[quoteIndex]}
+                </div>
+                <div 
+                  className="robot-interactive" 
+                  onClick={() => setQuoteIndex(prev => (prev + 1) % robotQuotes.length)}
+                  title="Click me to chat!"
+                >
+                  <RobotIcon />
+                </div>
+                <span style={{ fontSize: '0.75rem', opacity: 0.6, marginTop: '8px', fontWeight: 700 }}>
+                  🤖 Click the robot to interact!
+                </span>
+              </div>
+            </div>
+
+            <h3 className="mca-section-title" style={{ marginTop: '24px', marginBottom: '0' }}>AI Courses & Internship Opportunities</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
+              
+              <div className="mca-custom-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderTop: '4px solid #7C3AED', background: '#FFFFFF', color: '#1E293B', padding: '24px', borderRadius: '12px' }}>
+                <div>
+                  <span className="portal-pill" style={{ background: 'rgba(124,92,237,0.1)', color: '#7C3AED', alignSelf: 'flex-start', marginBottom: '12px', display: 'inline-block', fontSize: '0.75rem', fontWeight: 900 }}>Training & Internship</span>
+                  <h4 style={{ fontSize: '1.35rem', fontWeight: 900, margin: '8px 0', color: '#1E3A8A' }}>AI & Machine Learning (Specialist)</h4>
+                  <p style={{ opacity: 0.85, fontSize: '0.95rem', lineHeight: '1.5', margin: '8px 0' }}>
+                    Master Python data libraries (NumPy, Pandas), Scikit-Learn algorithms, neural networks, and model deployment. Includes projects on regression, computer vision, and NLP.
+                  </p>
+                </div>
+                <div style={{ borderTop: '1px dashed #E2E8F0', paddingTop: '12px', marginTop: '16px', display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem', fontWeight: 700 }}>
+                  <span>Duration: 6 Months</span>
+                  <span style={{ color: '#7C3AED' }}>Practical Projects</span>
+                </div>
+              </div>
+
+              <div className="mca-custom-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderTop: '4px solid #EC4899', background: '#FFFFFF', color: '#1E293B', padding: '24px', borderRadius: '12px' }}>
+                <div>
+                  <span className="portal-pill" style={{ background: 'rgba(236,72,153,0.1)', color: '#EC4899', alignSelf: 'flex-start', marginBottom: '12px', display: 'inline-block', fontSize: '0.75rem', fontWeight: 900 }}>Professional Boot Camp</span>
+                  <h4 style={{ fontSize: '1.35rem', fontWeight: 900, margin: '8px 0', color: '#BE185D' }}>Generative AI & LLM Engineering</h4>
+                  <p style={{ opacity: 0.85, fontSize: '0.95rem', lineHeight: '1.5', margin: '8px 0' }}>
+                    Learn Prompt Engineering, Gemini/OpenAI API integrations, LangChain framework, vector databases, and building RAG (Retrieval-Augmented Generation) applications.
+                  </p>
+                </div>
+                <div style={{ borderTop: '1px dashed #E2E8F0', paddingTop: '12px', marginTop: '16px', display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem', fontWeight: 700 }}>
+                  <span>Duration: 3 Months</span>
+                  <span style={{ color: '#EC4899' }}>API Mastery</span>
+                </div>
+              </div>
+
+              <div className="mca-custom-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderTop: '4px solid #10B981', background: '#FFFFFF', color: '#1E293B', padding: '24px', borderRadius: '12px' }}>
+                <div>
+                  <span className="portal-pill" style={{ background: 'rgba(16,185,129,0.1)', color: '#10B981', alignSelf: 'flex-start', marginBottom: '12px', display: 'inline-block', fontSize: '0.75rem', fontWeight: 900 }}>Hardware Lab</span>
+                  <h4 style={{ fontSize: '1.35rem', fontWeight: 900, margin: '8px 0', color: '#047857' }}>Robotics & Embedded Systems</h4>
+                  <p style={{ opacity: 0.85, fontSize: '0.95rem', lineHeight: '1.5', margin: '8px 0' }}>
+                    Build automated systems using Arduino & Raspberry Pi. Wire sensors, configure microcontrollers, and write code to control physical mechanical hardware modules.
+                  </p>
+                </div>
+                <div style={{ borderTop: '1px dashed #E2E8F0', paddingTop: '12px', marginTop: '16px', display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem', fontWeight: 700 }}>
+                  <span>Duration: 6 Months</span>
+                  <span style={{ color: '#10B981' }}>Hands-on Physical</span>
+                </div>
+              </div>
+
+            </div>
+
+            <h3 className="mca-section-title" style={{ marginTop: '24px', marginBottom: '0' }}>AI Tools Taught & Practiced</h3>
+            <div className="ai-tools-grid">
+              <div className="ai-tool-card">
+                <span className="ai-tool-icon">🧠</span>
+                <span className="ai-tool-name">Gemini / GPT</span>
+              </div>
+              <div className="ai-tool-card">
+                <span className="ai-tool-icon">💻</span>
+                <span className="ai-tool-name">GitHub Copilot</span>
+              </div>
+              <div className="ai-tool-card">
+                <span className="ai-tool-icon">🎨</span>
+                <span className="ai-tool-name">Stable Diffusion</span>
+              </div>
+              <div className="ai-tool-card">
+                <span className="ai-tool-icon">🔬</span>
+                <span className="ai-tool-name">TensorFlow</span>
+              </div>
+              <div className="ai-tool-card">
+                <span className="ai-tool-icon">🤖</span>
+                <span className="ai-tool-name">ROS / Arduino</span>
+              </div>
+              <div className="ai-tool-card">
+                <span className="ai-tool-icon">⛓️</span>
+                <span className="ai-tool-name">LangChain</span>
+              </div>
             </div>
           </section>
         )}
@@ -1789,6 +2437,7 @@ export default function LandingPage({
         </div>
       )}
 
+      <AcademyChatbot theme={theme} />
     </div>
   )
 }

@@ -918,12 +918,12 @@ export default function Exams({ batches = [], exams = MOCK_INITIAL_EXAMS, setExa
                   </thead>
                   <tbody>
                     {[
-                      { name: 'Arjun Mehta', roll: 'DC-10A-001', batch: '10A', score: 92, total: 100, status: 'PASS', grade: 'A+', timeSpent: '48m', warnings: 0 },
-                      { name: 'Jatin Prakash Behera', roll: 'DC-10A-999', batch: '10A', score: 85, total: 100, status: 'PASS', grade: 'A', timeSpent: '52m', warnings: 0 },
-                      { name: 'Priya Sharma', roll: 'DC-10A-002', batch: '10A', score: 78, total: 100, status: 'PASS', grade: 'B+', timeSpent: '55m', warnings: 1 },
-                      { name: 'Rohit Kumar', roll: 'DC-10A-003', batch: '10A', score: 64, total: 100, status: 'PASS', grade: 'B', timeSpent: '58m', warnings: 0 },
-                      { name: 'Sneha Patel', roll: 'DC-10B-001', batch: '10B', score: 88, total: 100, status: 'PASS', grade: 'A', timeSpent: '50m', warnings: 0 },
-                      { name: 'Karan Joshi', roll: 'DC-10A-004', batch: '10A', score: 32, total: 100, status: 'FAIL', grade: 'F', timeSpent: '30m', warnings: 3 }
+                      { name: 'Arjun Mehta', roll: 'DC-10A-01', batch: '10A', score: 92, total: 100, status: 'PASS', grade: 'A+', timeSpent: '48m', warnings: 0 },
+                      { name: 'Jatin Prakash Behera', roll: 'DC-10A-99', batch: '10A', score: 85, total: 100, status: 'PASS', grade: 'A', timeSpent: '52m', warnings: 0 },
+                      { name: 'Priya Sharma', roll: 'DC-10A-02', batch: '10A', score: 78, total: 100, status: 'PASS', grade: 'B+', timeSpent: '55m', warnings: 1 },
+                      { name: 'Rohit Kumar', roll: 'DC-10A-03', batch: '10A', score: 64, total: 100, status: 'PASS', grade: 'B', timeSpent: '58m', warnings: 0 },
+                      { name: 'Sneha Patel', roll: 'DC-10B-01', batch: '10B', score: 88, total: 100, status: 'PASS', grade: 'A', timeSpent: '50m', warnings: 0 },
+                      { name: 'Karan Joshi', roll: 'DC-10A-04', batch: '10A', score: 32, total: 100, status: 'FAIL', grade: 'F', timeSpent: '30m', warnings: 3 }
                     ].map(st => (
                       <tr key={st.roll}>
                         <td style={{ fontFamily: 'monospace', fontWeight: 600, color: '#38BDF8' }}>{st.roll}</td>
