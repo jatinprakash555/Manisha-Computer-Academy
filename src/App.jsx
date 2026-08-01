@@ -400,7 +400,7 @@ export default function App() {
     }
   }
 
-  // Fetch batches and students from Supabase on mount (only when authenticated)
+  // Fetch batches and students from Supabase on mount and listen for live updates
   useEffect(() => {
     if (!session) return
 
@@ -463,13 +463,29 @@ export default function App() {
         }
       } catch (err) {
         console.warn('Failed to load live data from Supabase (falling back to memory data):', err.message)
-        // Fallback to static memory seeds if tables do not exist yet
         setBatches(INITIAL_BATCHES)
         setStudents(INITIAL_STUDENTS)
         setDbConnected(false)
       }
     }
     loadData()
+
+    // Realtime listener for instant password & student profile updates
+    const channel = supabase
+      .channel('students-live-sync')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'students' }, (payload) => {
+        console.log('Realtime student change detected:', payload)
+        loadData()
+      })
+      .subscribe()
+
+    // Polling interval every 4 seconds as a fail-safe
+    const pollInterval = setInterval(loadData, 4000)
+
+    return () => {
+      supabase.removeChannel(channel)
+      clearInterval(pollInterval)
+    }
   }, [session])
 
   // Sync state changes to Supabase wrapper (with local state fallback)
