@@ -25,8 +25,8 @@ export default function Sidebar({ currentPage, onNavigate, onSignOut, userEmail,
     <aside className="sidebar">
       <div className="sidebar-brand">
         <div>
-          <h2>SAGAAN</h2>
-          <span className="sidebar-subtitle">INSTITUTIONAL PORTAL</span>
+          <h2>MCA</h2>
+          <span className="sidebar-subtitle">ADMIN PORTAL</span>
         </div>
       </div>
 
@@ -47,7 +47,7 @@ export default function Sidebar({ currentPage, onNavigate, onSignOut, userEmail,
 
       <div className="sidebar-footer">
         <div className="sidebar-nav-footer">
-          <div className="nav-item-sub" onClick={() => alert('Sagaan Support Center & Documentation active.')}>
+          <div className="nav-item-sub" onClick={() => alert('Manisha Computer Academy Help Center & Documentation active.')}>
             <span className="nav-icon">❓</span> Help Center
           </div>
           {onSignOut && (

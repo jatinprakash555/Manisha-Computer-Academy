@@ -216,11 +216,13 @@ export default function App() {
       const isStudent = emailOrId.startsWith('DC-') || emailOrId.startsWith('MCA-')
       if (isStudent) {
         // Query profile from Supabase
-        const { data: studentDb } = await supabase
+        const { data: studentDb, error: dbErr } = await supabase
           .from('students')
           .select('*')
           .eq('rollNumber', emailOrId)
           .maybeSingle()
+
+        if (dbErr) console.warn('Supabase student fetch error:', dbErr.message)
 
         // Query game stats from Supabase view
         const { data: statsDb } = await supabase
@@ -230,34 +232,20 @@ export default function App() {
           .maybeSingle()
 
         let foundStudent = studentDb
+        // Fallback to in-memory list (for local dev or if DB hasn't synced)
         if (!foundStudent) {
           foundStudent = students.find(s => s.rollNumber.toLowerCase() === emailOrId.toLowerCase())
         }
 
-        if (!foundStudent && (emailOrId === 'MCA-STUDENT-2026' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
-          foundStudent = {
-            name: 'Arjun Mehta',
-            rollNumber: emailOrId,
-            batch: '10A',
-            email: 'arjun.mehta@gmail.com',
-            phone: '+919876543210',
-            aiUsed: 42,
-            aiTotal: 150
-          }
-        }
-
         if (foundStudent) {
           if (foundStudent.phone && foundStudent.phone.trim() !== password.trim()) {
-            throw new Error('Incorrect password for this student Roll Number.')
+            throw new Error('Incorrect password. Please use the phone password set by your instructor.')
           }
-          const mergedStudent = {
-            ...foundStudent,
-            stats: statsDb || null
-          }
+          const mergedStudent = { ...foundStudent, stats: statsDb || null }
           setSession({ user: { email: mergedStudent.email, role: 'student', studentDetails: mergedStudent } })
           setCurrentPage('student-dashboard')
         } else {
-          throw new Error('Student Roll Number not found in registry.')
+          throw new Error('Roll Number not found. Please check your Roll Number or contact your instructor.')
         }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email: emailOrId, password })
@@ -266,44 +254,9 @@ export default function App() {
         setCurrentPage('dashboard')
       }
     } catch (err) {
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        const isStudent = emailOrId.startsWith('DC-') || emailOrId.startsWith('MCA-')
-        if (isStudent) {
-          const mockStudent = students.find(s => s.rollNumber.toLowerCase() === emailOrId.toLowerCase()) || {
-            name: 'Aadesh Shrivastav',
-            rollNumber: emailOrId,
-            batch: '10A',
-            email: 'mca-10a-011.temp@manisha.academy',
-            phone: 'Aadesh@10A',
-            aiUsed: 0,
-            aiTotal: 150
-          }
-          if (mockStudent.phone && mockStudent.phone.trim() !== password.trim()) {
-            setAuthError('Incorrect student password.')
-            setAuthLoading(false)
-            return
-          }
-          const { data: statsDb } = await supabase
-            .from('student_stats_ranked')
-            .select('*')
-            .eq('roll_number', mockStudent.rollNumber)
-            .maybeSingle()
-          
-          setSession({ 
-            user: { 
-              email: mockStudent.email, 
-              role: 'student', 
-              studentDetails: { ...mockStudent, stats: statsDb || null } 
-            } 
-          })
-          setCurrentPage('student-dashboard')
-        } else {
-          setSession({ user: { email: emailOrId || 'jatinprakashb1@gmail.com', role: 'admin' } })
-          setCurrentPage('dashboard')
-        }
-      } else {
-        setAuthError(err.message || 'Sign in failed. Please check your credentials.')
-      }
+      setAuthError(err.message || 'Sign in failed. Please check your credentials.')
+      setAuthLoading(false)
+      throw err  // re-throw so Quick Portal form can display inline error
     } finally {
       setAuthLoading(false)
     }

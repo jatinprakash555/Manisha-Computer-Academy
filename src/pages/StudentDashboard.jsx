@@ -172,7 +172,7 @@ export default function StudentDashboard({ student, onSignOut, theme }) {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                 {/* CBT PC Client */}
                 <a 
-                  href="/Releases/sagaan-exam-engine.exe" 
+                  href="/Releases/mca-exam-engine.exe" 
                   download
                   style={{ 
                     display: 'flex', 
@@ -192,14 +192,14 @@ export default function StudentDashboard({ student, onSignOut, theme }) {
                   <div style={{ fontSize: '2.2rem' }}>💻</div>
                   <div style={{ textAlign: 'left' }}>
                     <div style={{ fontWeight: 'bold', fontSize: '1rem' }}>CBT Examination Client (PC)</div>
-                    <div style={{ fontSize: '0.75rem', opacity: 0.8 }}>Download sagaan-exam-engine.exe</div>
+                    <div style={{ fontSize: '0.75rem', opacity: 0.8 }}>Download mca-exam-engine.exe</div>
                   </div>
                 </a>
 
                 {/* Android APK */}
                 <a 
-                  href="/Releases/Sagaan_v1.0.0_b41.apk" 
-                  download
+                  href="/Releases/mca-latest.apk" 
+                  download="MCA_Student_App_Latest.apk"
                   style={{ 
                     display: 'flex', 
                     alignItems: 'center', 
@@ -217,7 +217,7 @@ export default function StudentDashboard({ student, onSignOut, theme }) {
                 >
                   <div style={{ fontSize: '2.2rem' }}>📱</div>
                   <div style={{ textAlign: 'left' }}>
-                    <div style={{ fontWeight: 'bold', fontSize: '1rem' }}>Sagaan Mobile App (Android)</div>
+                    <div style={{ fontWeight: 'bold', fontSize: '1rem' }}>MCA Student App (Android)</div>
                     <div style={{ fontSize: '0.75rem', opacity: 0.8 }}>Download latest APK release</div>
                   </div>
                 </a>

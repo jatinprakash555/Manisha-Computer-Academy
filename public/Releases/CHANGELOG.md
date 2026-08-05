@@ -1,5 +1,84 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 60)] - 2026-08-05
+- Generated and integrated 1,200+ comprehensive MCQ question packs across all 12 curriculum chapters
+- Modularized chapter question architectures (PgdcaChapter1Questions through PgdcaChapter12Questions)
+- Optimized JVM bytecode execution preventing compilation constant pool limits
+
+
+---
+
+## [1.0.0 (Build 59)] - 2026-08-01
+- Fixed profile screen phone updating so custom text phone numbers (e.g. Sweety@OSCIT) can be updated without 10-digit validation errors.
+- Triggered direct HTTP PATCH phone sync on student profile credential updates to guarantee real-time database synchronization.
+
+
+---
+
+## [1.0.0 (Build 58)] - 2026-08-01
+- Refactored student credential syncing to use HTTP PATCH for updating existing student rows by roll number.
+- Added automatic fallback to POST if PATCH is unavailable.
+- Made cache/Firestore background sync non-blocking so student onboarding and password creation never fail with database sync errors.
+
+
+---
+
+## [1.0.0 (Build 57)] - 2026-08-01
+ 
+
+
+---
+
+## [1.0.0 (Build 56)] - 2026-08-01
+- Fixed student metadata fallback to resolve details directly from Supabase database table.
+- Added intelligent flexible name matching (case-insensitive, first name/partial word overlap) so students can log in without exact character-by-character string matching errors.
+- Resolved 'Student registration details not found' issue for newly registered students.
+
+
+---
+
+## [1.0.0 (Build 55)] - 2026-08-01
+- Fixed student metadata resolution so records from Supabase table directly populate student profiles without requiring Firestore cache.
+- Implemented intelligent flexible name matching for first name, full name, and case-insensitive variations.
+- Resolved 'Student registration details not found' issue during onboarding.
+
+
+---
+
+## [1.0.0 (Build 54)] - 2026-08-01
+- Updated onboarding authentication to check ONLY Roll Number and Student Name as core verification parameters.
+- Phone number field now accepts custom text strings (e.g. Sweety@OSCIT) without digit restrictions.
+- Automatically stores and syncs user-entered phone text strings to Supabase database.
+
+
+---
+
+## [1.0.0 (Build 53)] - 2026-08-01
+- Fixed coaching institution lookup fallback so student login and onboarding are never blocked by missing institution documents.
+- Defaulted institution fallback to Manisha Computer Academy across all authentication channels.
+- Allowed editable phone numbers on first-time onboarding with automated database sync.
+
+
+---
+
+## [1.0.0 (Build 52)] - 2026-08-01
+- Removed institution name input field from onboarding flow.
+- Defaulted institution name to Manisha Computer Academy across app and local storage.
+- Made phone number editable during onboarding and updated backend verification to auto-update student phone records in Supabase database.
+- Fixed profile modal overlay issues in institutional web dashboard.
+
+
+---
+
+## [1.0.0 (Build 51)] - 2026-08-01
+- Added secure SHA-256 password hashing system for students.
+- Integrated password check and set flows during onboarding/sign-in.
+- Added 'Forgot Password' passwordless OTP recovery mechanism.
+- Implemented 'Edit Profile & Password' dialog directly on the student profile screen.
+
+
+---
+
 ## [1.0.0 (Build 50)] - 2026-07-29
  
 
@@ -354,6 +433,16 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
+
+
+
+
+
+
+
+
+
 
 
 

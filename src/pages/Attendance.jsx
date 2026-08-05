@@ -176,7 +176,7 @@ export default function Attendance({ batches = [], students = [] }) {
               <h3>SYNC METADATA LOG</h3>
             </div>
             <div className="console-box">
-              <span style={{ color: 'var(--text-muted)' }}>$ sagaan-cli --sync-attendance</span>
+              <span style={{ color: 'var(--text-muted)' }}>$ mca-cli --sync-attendance</span>
               <p style={{ color: 'var(--status-success)' }}>&gt; Preparing bitstream serialization...</p>
               <p style={{ color: 'var(--text-main)' }}>batch_id: "{selectedBatch}"</p>
               <p style={{ color: 'var(--text-main)' }}>payload: [{bitstreamPayload.join('')}]</p>

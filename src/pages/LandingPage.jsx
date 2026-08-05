@@ -42,7 +42,7 @@ const AcademyChatbot = ({ theme }) => {
   const knowledgeBase = [
     {
       keywords: ['course', 'syllabus', 'learn', 'subject', 'teach', 'study', 'class'],
-      response: "At Manisha Computer Academy, we offer a wide range of professional computer courses. For foundational digital skills, we provide the 3-month OSCIT course. If you want a comprehensive diploma, we offer PGDCA and DCA courses that run for 6 to 12 months. We also teach core programming in languages like C, C++, Java, and Python, alongside advanced classes in Artificial Intelligence, Robotics, Cyber Security, Big Data, AutoCAD, and Tally Prime with GST. Additionally, we run school coaching classes for academic students."
+      response: "At Manisha Computer Academy, we offer 40+ professional and academic courses. For IT certifications: OSCIT (3 months), PGDCA (12 months), and DCA (6 months). For programming: C, C++, Java, Python, HTML5, and Web Design. Advanced courses include Artificial Intelligence, Robotics, Cyber Security, Big Data, and AutoCAD. We also offer Tally Prime with GST, MS Office, and Advanced Excel. Additionally, we provide school tuition for CBSE and ICSE students from Class 1 to Class 10, covering Mathematics, Science, English, and Computer Science."
     },
     {
       keywords: ['ai', 'artificial intelligence', 'machine learning', 'ml', 'llm', 'generative'],
@@ -54,7 +54,7 @@ const AcademyChatbot = ({ theme }) => {
     },
     {
       keywords: ['fee', 'cost', 'price', 'admission', 'apply', 'join', 'register', 'enroll'],
-      response: "Admissions are active! Course prices and fees depend on your specific program. For detailed pricing details, please reach out to us by email at registrar@manishaacademy.edu, call our registrar office directly at 8260164606 or 9861487672, or visit our campus located near Nuapada Durga Mandap in Cuttack, Odisha, where our counseling team will assist you with full details."
+      response: "Admissions are active! Course prices and fees depend on your specific program. For detailed pricing details, please reach out to us by email at manishacomputer2019@gmail.com, call our registrar office directly at 8260164606 or 9861487672, or visit our campus located near Nuapada Durga Mandap in Cuttack, Odisha, where our counseling team will assist you with full details."
     },
     {
       keywords: ['time', 'schedule', 'hour', 'timing', 'open', 'close', 'duration'],
@@ -62,7 +62,7 @@ const AcademyChatbot = ({ theme }) => {
     },
     {
       keywords: ['address', 'location', 'where', 'map', 'cuttack', 'campus', 'phone', 'contact', 'call', 'number', 'mobile'],
-      response: "Our campus is located at Nuapada, Madhupatna, near the Nuapada Durga Mandap in Cuttack, Odisha, India. You can contact us directly by phone at 8260164606 or 9861487672, or write to our registrar via email at registrar@manishaacademy.edu."
+      response: "Our campus is located at Nuapada, Madhupatna, near the Nuapada Durga Mandap in Cuttack, Odisha, India. You can contact us directly by phone at 8260164606 or 9861487672, or write to our registrar via email at manishacomputer2019@gmail.com."
     },
     {
       keywords: ['robot', 'hardware', 'embedded', 'arduino', 'raspberry pi'],
@@ -428,8 +428,10 @@ export default function LandingPage({
   const [generatedId, setGeneratedId] = useState('')
   const [generatedOtp, setGeneratedOtp] = useState('')
   const [otpInput, setOtpInput] = useState('')
-  const [quickInstId, setQuickInstId] = useState('MCA-STUDENT-2026')
-  const [quickPass, setQuickPass] = useState('student123')
+  const [quickInstId, setQuickInstId] = useState('')
+  const [quickPass, setQuickPass] = useState('')
+  const [portalLoading, setPortalLoading] = useState(false)
+  const [portalError, setPortalError] = useState('')
   const [otpNotice, setOtpNotice] = useState('')
 
   const handleSendOtp = (e) => {
@@ -454,9 +456,21 @@ export default function LandingPage({
     onSignUp(email, password, institution, generatedId)
   }
 
-  const handleQuickPortalLogin = (e) => {
+  const handleQuickPortalLogin = async (e) => {
     e.preventDefault()
-    onLogin(quickInstId, quickPass)
+    if (!quickInstId.trim() || !quickPass.trim()) {
+      setPortalError('Please enter your Roll Number and Password.')
+      return
+    }
+    setPortalLoading(true)
+    setPortalError('')
+    try {
+      await onLogin(quickInstId.trim(), quickPass.trim())
+    } catch (err) {
+      setPortalError(err.message || 'Login failed. Please check your credentials.')
+    } finally {
+      setPortalLoading(false)
+    }
   }
 
   const handleSubmit = (e) => {
@@ -1501,7 +1515,7 @@ export default function LandingPage({
       {/* ─── PAGE 1: CHALKBOARD WELCOME ENTRANCE SCREEN ────────────────────────── */}
       <section className="welcome-blackboard-hero">
         
-        {/* Top row containing institutional badges */}
+      {/* Top row containing institutional badges */}
         <div className="welcome-top-row">
           <div className="blackboard-badge-item">
             <svg width="34" height="34" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1526,6 +1540,40 @@ export default function LandingPage({
               <span className="title-sub">Regd. No. 334/2019</span>
             </div>
           </div>
+
+          {/* Instagram Link — top-right of blackboard */}
+          <a
+            href="https://www.instagram.com/manishacomputer.26?utm_source=qr&igsh=cGZ0dWlibjRsMWps"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Follow us on Instagram @manishacomputer.26"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '6px 14px',
+              borderRadius: '999px',
+              background: 'linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
+              color: '#fff',
+              textDecoration: 'none',
+              fontWeight: 700,
+              fontSize: '0.82rem',
+              letterSpacing: '0.03em',
+              boxShadow: '0 4px 16px rgba(220,39,67,0.35)',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+              border: '1.5px solid rgba(255,255,255,0.25)',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.07)'; e.currentTarget.style.boxShadow = '0 6px 22px rgba(220,39,67,0.55)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(220,39,67,0.35)'; }}
+          >
+            {/* Instagram SVG icon */}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="20" height="20" rx="6" stroke="white" strokeWidth="2"/>
+              <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="2"/>
+              <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+            </svg>
+            @manishacomputer.26
+          </a>
         </div>
 
         {/* Floating Academic Subject Words (Absolute left/right boundaries to prevent overlaps) */}
@@ -1702,8 +1750,10 @@ export default function LandingPage({
 
                   <div className="hero-badges">
                     <span className="hero-badge-item">✓ Govt. Registered Institute</span>
-                    <span className="hero-badge-item">✓ 15+ Years Legacy</span>
+                    <span className="hero-badge-item">✓ 7+ Years of Excellence</span>
                     <span className="hero-badge-item">✓ Hands-on Lab Guidance</span>
+                    <span className="hero-badge-item">✓ 40+ Courses Offered</span>
+                    <span className="hero-badge-item">✓ CBSE &amp; ICSE Tuition (Class 1–10)</span>
                   </div>
                 </div>
 
@@ -1762,18 +1812,18 @@ export default function LandingPage({
                     </thead>
                     <tbody>
                       <tr>
-                        <td><strong>Sagaan Student Portal APK</strong> (Android Mobile)</td>
+                        <td><strong>MCA Student Portal APK</strong> (Android Mobile)</td>
                         <td>v1.0.0 (Build 41)</td>
                         <td>2026-07-28</td>
                         <td>Asynchronous IO parser, explicit bitmap recycling, C++ OOP masterclass courseware, and TTS progress listeners.</td>
-                        <td><a href="/Releases/Sagaan_v1.0.0_b41.apk" download style={{ textDecoration: 'underline', fontWeight: 'bold', color: 'inherit' }}>Download APK</a></td>
+                        <td><a href="/Releases/mca-latest.apk" download="MCA_Student_App_Latest.apk" style={{ textDecoration: 'underline', fontWeight: 'bold', color: 'inherit' }}>Download APK</a></td>
                       </tr>
                       <tr>
                         <td><strong>CBT Examination Client</strong> (PC App)</td>
                         <td>v1.2.0 (Build 5)</td>
                         <td>2026-07-28</td>
                         <td>Secure exam lockouts, secure database sync, and automated score uploads.</td>
-                        <td><a href="/Releases/sagaan-exam-engine.exe" download style={{ textDecoration: 'underline', fontWeight: 'bold', color: 'inherit' }}>Download Installer</a></td>
+                        <td><a href="/Releases/mca-exam-engine.exe" download style={{ textDecoration: 'underline', fontWeight: 'bold', color: 'inherit' }}>Download Installer</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -1791,7 +1841,7 @@ export default function LandingPage({
                     </ul>
                   </div>
                   <div className="sys-req-box">
-                    <span className="sys-req-title">📱 Sagaan Android App System Specs</span>
+                    <span className="sys-req-title">📱 MCA Android App System Specs</span>
                     <ul className="sys-req-list">
                       <li><strong>Minimum OS:</strong> Android 8.0 (Oreo) or higher</li>
                       <li><strong>System RAM:</strong> 2 GB active memory</li>
@@ -1823,8 +1873,16 @@ export default function LandingPage({
                   Wide Range of Professional & Career-Oriented Courses:
                 </h4>
                 <p style={{ fontSize: '1.1rem', margin: 0, opacity: 0.9 }}>
-                  We offer OSCIT, PGDCA, DCA, Tally Prime with GST, MS Office, Advanced Excel, C, C++, Java, Python, Artificial Intelligence (AI), Robotics, Cyber Security, Big Data, AutoCAD, and many more. Along with computer education, we also provide coaching classes for school students.
+                  We offer <strong>40+ courses</strong> spanning professional IT, academics, and skill development:
                 </p>
+                <ul style={{ marginTop: '10px', paddingLeft: '20px', lineHeight: '2', fontSize: '1.05rem', opacity: 0.9 }}>
+                  <li>🎓 <strong>IT Certifications:</strong> OSCIT, PGDCA, DCA</li>
+                  <li>📊 <strong>Accounting & Commerce:</strong> Tally Prime with GST, Advanced Excel</li>
+                  <li>💻 <strong>Office Suite:</strong> MS Office (Word, Excel, PowerPoint, Access)</li>
+                  <li>🖥️ <strong>Programming:</strong> C, C++, Java, Python, HTML5, Web Design</li>
+                  <li>🤖 <strong>Advanced Tech:</strong> Artificial Intelligence (AI), Robotics, Cyber Security, Big Data, AutoCAD</li>
+                  <li>🏫 <strong>School Tuition (CBSE &amp; ICSE):</strong> Mathematics, Science, English &amp; Computer Science for Class 1 to Class 10</li>
+                </ul>
               </div>
 
               <p style={{ fontSize: '1.1rem', opacity: 0.9, marginBottom: '24px' }}>
@@ -1956,7 +2014,10 @@ export default function LandingPage({
         {/* ─── TAB CONTENT: FEATURES & OS-CIT LEARNING ─── */}
         {activeTab === 'features' && (
           <section className="mca-section animate-fade">
-            <h2 className="mca-section-title">OS-CIT Learning Features & Student Benefits</h2>
+            <h2 className="mca-section-title">Courses, OS-CIT Learning &amp; Student Benefits</h2>
+            <p style={{ fontSize: '1.05rem', opacity: 0.85, marginBottom: '18px' }}>
+              Manisha Computer Academy offers <strong>40+ courses</strong> — from professional IT certifications to school tuition for <strong>CBSE &amp; ICSE students (Class 1–10)</strong>.
+            </p>
             
             {/* OS-CIT Emblem Logo Badge */}
             {/* OS-CIT Emblem Logo Badge */}
@@ -2127,6 +2188,40 @@ export default function LandingPage({
                 </div>
               </div>
 
+              {/* Card 5: School Tuition CBSE & ICSE */}
+              <div style={{
+                background: '#FFFFFF',
+                border: '3px solid #059669',
+                borderRadius: '16px',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                boxShadow: '0 8px 20px rgba(0,0,0,0.06)',
+                color: '#1E293B',
+                textAlign: 'center',
+                position: 'relative'
+              }}>
+                <div style={{ position: 'absolute', top: '10px', left: '10px', fontSize: '0.65rem', fontWeight: 900, background: '#ECFDF5', color: '#059669', padding: '3px 8px', borderRadius: '8px', border: '1px solid #A7F3D0' }}>
+                  📚 SCHOOL TUITION
+                </div>
+                <div style={{ padding: '30px 20px 20px' }}>
+                  <div style={{ fontSize: '2.2rem', marginBottom: '8px' }}>🏫</div>
+                  <div style={{ fontSize: '2.0rem', fontWeight: 950, color: '#059669', fontFamily: "'Impact', sans-serif", letterSpacing: '0.5px' }}>
+                    CBSE &amp; ICSE
+                  </div>
+                  <div style={{ fontSize: '0.95rem', fontWeight: 800, margin: '12px 0 6px', color: '#334155', lineHeight: '1.4' }}>
+                    School Tuition — Class 1 to Class 10
+                  </div>
+                  <div style={{ fontSize: '0.8rem', opacity: 0.75, lineHeight: '1.5' }}>
+                    Mathematics · Science · English · Computer Science
+                  </div>
+                </div>
+                <div style={{ background: '#059669', color: '#FFFFFF', padding: '10px', fontWeight: 900, fontSize: '1.05rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  All Academic Subjects
+                </div>
+              </div>
+
             </div>
 
             {/* Affiliation Notice */}
@@ -2261,7 +2356,7 @@ export default function LandingPage({
                   &nbsp;&nbsp;• Monday – Saturday: 8:00 AM – 1:00 PM & 4:00 PM – 9:00 PM<br/>
                   &nbsp;&nbsp;• Sunday: Closed<br/>
                   <strong>Contact Number:</strong> 8260164606, 9861487672<br/>
-                  <strong>Registrar Mail:</strong> registrar@manishaacademy.edu
+                  <strong>Registrar Mail:</strong> <a href="mailto:manishacomputer2019@gmail.com" style={{ color: 'inherit' }}>manishacomputer2019@gmail.com</a>
                 </p>
                 <p style={{ fontSize: '1rem', marginTop: '16px', opacity: 0.8 }}>
                   Our admissions helpdesk is open during the working hours listed above.
@@ -2321,30 +2416,54 @@ export default function LandingPage({
 
             <form className="mca-custom-card" style={{ margin: 0 }} onSubmit={handleQuickPortalLogin}>
               <div className="portal-form-group">
-                <label>Institutional Account ID</label>
+                <label>Student Roll Number</label>
                 <input 
                   type="text" 
                   className="portal-input"
-                  placeholder="MCA-XXXX-2026"
+                  placeholder="e.g. MCA-OSCIT_12PM-001"
                   value={quickInstId}
-                  onChange={(e) => setQuickInstId(e.target.value)}
+                  onChange={(e) => { setQuickInstId(e.target.value); setPortalError('') }}
                   required
+                  autoComplete="username"
                 />
               </div>
               <div className="portal-form-group">
-                <label>Password</label>
+                <label>Password <span style={{ fontSize: '0.78rem', opacity: 0.65, fontWeight: 400 }}>(your registered phone password)</span></label>
                 <input 
                   type="password" 
                   className="portal-input"
                   placeholder="••••••••"
                   value={quickPass}
-                  onChange={(e) => setQuickPass(e.target.value)}
+                  onChange={(e) => { setQuickPass(e.target.value); setPortalError('') }}
                   required
+                  autoComplete="current-password"
                 />
               </div>
-              <button type="submit" className="portal-submit-btn">
-                Sign In to Classroom &rarr;
+
+              {/* Error message */}
+              {portalError && (
+                <div style={{
+                  background: 'rgba(239,68,68,0.1)',
+                  border: '1px solid rgba(239,68,68,0.4)',
+                  color: '#EF4444',
+                  borderRadius: '8px',
+                  padding: '10px 14px',
+                  fontSize: '0.88rem',
+                  marginBottom: '8px'
+                }}>
+                  ⚠️ {portalError}
+                </div>
+              )}
+
+              <button type="submit" className="portal-submit-btn" disabled={portalLoading}>
+                {portalLoading
+                  ? <span>⏳ Verifying with database...</span>
+                  : <span>Sign In to Classroom →</span>}
               </button>
+
+              <p style={{ fontSize: '0.78rem', opacity: 0.6, textAlign: 'center', margin: '10px 0 0' }}>
+                Use your <strong>Roll Number</strong> (e.g. MCA-OSCIT_12PM-001) and the <strong>phone password</strong> set by your instructor.
+              </p>
             </form>
           </div>
         </section>
@@ -2357,10 +2476,27 @@ export default function LandingPage({
               © 2026 Manisha Computer Academy. All rights reserved.
             </span>
           </div>
-          <div style={{ display: 'flex', gap: '20px' }}>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
             <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Academy Rules</a>
             <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Syllabus Details</a>
             <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Contact Registrar</a>
+            {/* Instagram footer icon */}
+            <a
+              href="https://www.instagram.com/manishacomputer.26?utm_source=qr&igsh=cGZ0dWlibjRsMWps"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Instagram @manishacomputer.26"
+              style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'inherit', textDecoration: 'none', opacity: 0.85 }}
+              onMouseEnter={e => e.currentTarget.style.opacity = '1'}
+              onMouseLeave={e => e.currentTarget.style.opacity = '0.85'}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="20" height="20" rx="6" stroke="currentColor" strokeWidth="2"/>
+                <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2"/>
+                <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+              </svg>
+              Instagram
+            </a>
           </div>
         </footer>
 
