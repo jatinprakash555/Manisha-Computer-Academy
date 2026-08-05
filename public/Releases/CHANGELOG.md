@@ -1,5 +1,12 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 61)] - 2026-08-05
+- Fixed quiz question sampling logic: Evenly balanced NCERT (34), EXEMPLAR (33), and RD_SHARMA (33) across 100 questions per chapter
+- Expanded active quiz session size to 10 randomized MCQs with automatic fallbacks ensuring deep question pool variety
+
+
+---
+
 ## [1.0.0 (Build 60)] - 2026-08-05
 - Generated and integrated 1,200+ comprehensive MCQ question packs across all 12 curriculum chapters
 - Modularized chapter question architectures (PgdcaChapter1Questions through PgdcaChapter12Questions)
@@ -433,6 +440,7 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
 
 
 
