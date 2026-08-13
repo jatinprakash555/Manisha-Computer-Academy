@@ -1,5 +1,12 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 71)] - 2026-08-13
+- Added automatic 3x retry loop with 4-second exponential backoff for Gemini API rate limits (HTTP 429)
+- Ensured seamless AI chat experience even if multiple students request AI tutoring simultaneously
+
+
+---
+
 ## [1.0.0 (Build 70)] - 2026-08-13
  
 
@@ -497,6 +504,7 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
 
 
 
