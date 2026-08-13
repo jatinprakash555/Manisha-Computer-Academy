@@ -1,5 +1,18 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 64)] - 2026-08-13
+ 
+
+
+---
+
+## [1.0.0 (Build 63)] - 2026-08-13
+- Enabled fullSensor auto-rotation support in AndroidManifest.xml with configChanges handling (orientation, screenSize, smallestScreenSize)
+- Added responsive verticalScroll containers across QuizScreen, ChapterScreen, ResultScreen, and ProfileScreen ensuring seamless landscape orientation adaptation without clipping
+
+
+---
+
 ## [1.0.0 (Build 62)] - 2026-08-13
 - Completely rewritten Chapter 7 MS Access Masterclass with comprehensive beginner-friendly RDBMS theory, Data Types guide, Primary/Foreign Keys, Query Design Grid, Forms, Reports, Shortcuts, and Academy Management Practical Projects
 
@@ -446,6 +459,8 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
+
 
 
 
