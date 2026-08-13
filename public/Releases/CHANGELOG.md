@@ -1,5 +1,11 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 62)] - 2026-08-13
+- Completely rewritten Chapter 7 MS Access Masterclass with comprehensive beginner-friendly RDBMS theory, Data Types guide, Primary/Foreign Keys, Query Design Grid, Forms, Reports, Shortcuts, and Academy Management Practical Projects
+
+
+---
+
 ## [1.0.0 (Build 61)] - 2026-08-05
 - Fixed quiz question sampling logic: Evenly balanced NCERT (34), EXEMPLAR (33), and RD_SHARMA (33) across 100 questions per chapter
 - Expanded active quiz session size to 10 randomized MCQs with automatic fallbacks ensuring deep question pool variety
@@ -440,6 +446,7 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
 
 
 
