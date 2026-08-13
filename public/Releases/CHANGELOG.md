@@ -1,5 +1,11 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 68)] - 2026-08-13
+- Removed historical context and origin story parts across chapters (Chapters 1, 2, 10, 11, 12) for direct, practical, beginner-focused learning
+
+
+---
+
 ## [1.0.0 (Build 67)] - 2026-08-13
 - Completely rewritten Chapter 12 Tally Prime & Financial Accounting Masterclass with topic-wise visual reference UI mockups, step-by-step operating guide for company creation, ledgers, stock items, all 8 voucher types (F4-F9), GST setup, financial reports, and shortcuts
 
@@ -477,6 +483,7 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
 
 
 
