@@ -1,5 +1,11 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 67)] - 2026-08-13
+- Completely rewritten Chapter 12 Tally Prime & Financial Accounting Masterclass with topic-wise visual reference UI mockups, step-by-step operating guide for company creation, ledgers, stock items, all 8 voucher types (F4-F9), GST setup, financial reports, and shortcuts
+
+
+---
+
 ## [1.0.0 (Build 66)] - 2026-08-13
 - Detailed all 7 Core Concepts of Object-Oriented Programming (Classes, Objects, Encapsulation, Abstraction, Inheritance, Polymorphism, Dynamic Binding & Message Passing) in Chapter 11 C++ Masterclass
 
@@ -471,6 +477,7 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
 
 
 
