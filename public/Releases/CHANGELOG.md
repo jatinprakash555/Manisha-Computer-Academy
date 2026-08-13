@@ -1,5 +1,11 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 66)] - 2026-08-13
+- Detailed all 7 Core Concepts of Object-Oriented Programming (Classes, Objects, Encapsulation, Abstraction, Inheritance, Polymorphism, Dynamic Binding & Message Passing) in Chapter 11 C++ Masterclass
+
+
+---
+
 ## [1.0.0 (Build 65)] - 2026-08-13
 - Completely rewritten Chapter 11 C++ Programming & OOP Masterclass with beginner-friendly fundamentals, C vs C++, Modern vs Turbo C++ syntax, Pointers & Dynamic Memory (new/delete), 5 Pillars of OOP (Encapsulation, Abstraction, Inheritance, Polymorphism), STL, Keyboard Shortcuts, and Practical Student System Project
 
@@ -465,6 +471,7 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
 
 
 
