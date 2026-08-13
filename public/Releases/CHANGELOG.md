@@ -1,5 +1,19 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 70)] - 2026-08-13
+ 
+
+
+---
+
+## [1.0.0 (Build 69)] - 2026-08-13
+- Replaced Octopus mascot, underwater bubbles, and octopus voice with high-resolution 3D MCA Learning Logo emblem, sparkling gold/violet academy particles, and MCA AI Tutor
+- Transformed MainActivity splash and onboarding screens into MCA Learning interactive platform branding with inspirational quotes and dark luxury theme matching
+- Updated static blue colors to match the app's gold/purple cosmic palette across screens
+
+
+---
+
 ## [1.0.0 (Build 68)] - 2026-08-13
 - Removed historical context and origin story parts across chapters (Chapters 1, 2, 10, 11, 12) for direct, practical, beginner-focused learning
 
@@ -483,6 +497,8 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
+
 
 
 
