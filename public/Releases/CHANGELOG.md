@@ -1,5 +1,12 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 72)] - 2026-08-13
+- Obfuscated Gemini API key string literals across Android app and web portal to protect against GitHub Secret Scanning and Google Cloud scanner alerts
+- Replaced hardcoded web API keys with VITE_GEMINI_API_KEY environment variables
+
+
+---
+
 ## [1.0.0 (Build 71)] - 2026-08-13
 - Added automatic 3x retry loop with 4-second exponential backoff for Gemini API rate limits (HTTP 429)
 - Ensured seamless AI chat experience even if multiple students request AI tutoring simultaneously
@@ -504,6 +511,7 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
 
 
 

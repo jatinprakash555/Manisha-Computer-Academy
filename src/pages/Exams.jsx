@@ -192,7 +192,7 @@ export default function Exams({ batches = [], exams = MOCK_INITIAL_EXAMS, setExa
 
   const handleGenerateAiPaper = async () => {
     setIsGenerating(true)
-    const GEMINI_API_KEY = "AIzaSyCvLghZgsBjZ3ap0JxcRb7OkEaEiYfCyXw"
+    const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || ""
     const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`
 
     const prompt = `Generate ${questionCount} unique multiple-choice questions for ${subject} at difficulty level ${difficultyLevel} out of 10 (${DIFFICULTY_LABELS[difficultyLevel]}). Return ONLY a valid JSON array of objects with keys: "id" (number), "text" (string), "options" (array of 4 strings), "correctIndex" (number 0-3), "explanation" (string).`
