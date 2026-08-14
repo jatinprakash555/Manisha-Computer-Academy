@@ -1,5 +1,17 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 74)] - 2026-08-14
+- Added comprehensive GST Masterclass guide in Tally Prime (Chapter 12) featuring CGST/SGST/IGST architecture, HSN/SAC codes, F11 GST activation, duty ledger setup, step-by-step voucher entry, tax invoice preview diagrams, GSTR-1/GSTR-3B reporting, and practical GST calculation problems with solutions
+
+
+---
+
+## [1.0.0 (Build 73)] - 2026-08-14
+- Renamed application label to "MCA Learning" across AndroidManifest.xml and web portals
+
+
+---
+
 ## [1.0.0 (Build 72)] - 2026-08-13
 - Obfuscated Gemini API key string literals across Android app and web portal to protect against GitHub Secret Scanning and Google Cloud scanner alerts
 - Replaced hardcoded web API keys with VITE_GEMINI_API_KEY environment variables
@@ -511,6 +523,8 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
+
 
 
 
