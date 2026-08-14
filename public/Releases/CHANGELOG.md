@@ -1,5 +1,11 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 78)] - 2026-08-14
+- Fixed crash on Quiz Mode Tab in ChapterScreen.kt by resolving nested verticalScroll modifier conflict in Jetpack Compose
+
+
+---
+
 ## [1.0.0 (Build 77)] - 2026-08-14
 - Updated MS Excel Masterclass (Chapter 5): added explicit group-by-group feature definitions for every tool across all Ribbon Tabs (File, Home, Insert, Page Layout, Formulas, Data, Review, View)
 
@@ -541,6 +547,7 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
 
 
 
