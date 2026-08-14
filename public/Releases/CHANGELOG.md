@@ -1,5 +1,11 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 75)] - 2026-08-14
+- Updated MS PowerPoint Masterclass (Chapter 6): removed historical background, added 100% descriptive ribbon guide for every Tab, Ribbon Group, Option, Animation Pane timeline, Slide Master, Presenter View, and shortcuts
+
+
+---
+
 ## [1.0.0 (Build 74)] - 2026-08-14
 - Added comprehensive GST Masterclass guide in Tally Prime (Chapter 12) featuring CGST/SGST/IGST architecture, HSN/SAC codes, F11 GST activation, duty ledger setup, step-by-step voucher entry, tax invoice preview diagrams, GSTR-1/GSTR-3B reporting, and practical GST calculation problems with solutions
 
@@ -523,6 +529,7 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
 
 
 
