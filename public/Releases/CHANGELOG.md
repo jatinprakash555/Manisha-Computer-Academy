@@ -1,5 +1,11 @@
 # Sagaan - Release History
 
+## [1.0.0 (Build 77)] - 2026-08-14
+- Updated MS Excel Masterclass (Chapter 5): added explicit group-by-group feature definitions for every tool across all Ribbon Tabs (File, Home, Insert, Page Layout, Formulas, Data, Review, View)
+
+
+---
+
 ## [1.0.0 (Build 76)] - 2026-08-14
 - Updated MS Excel Spreadsheet Masterclass (Chapter 5): added structured architecture, cell referencing ($A$1), error types, 30+ formulas (XLOOKUP, IFS, INDEX/MATCH), full ribbon guide by tab & group, Flash Fill, Data Validation, Goal Seek, Pivot Tables, Slicers, and ASCII diagrams
 
@@ -535,6 +541,7 @@ Fixed quiz option visibility and layout overflow in QuizScreen. Specifically, su
 
 --- 
  
+
 
 
 
